@@ -729,6 +729,7 @@ svg {
   }
 
   .swiper-button-prev, .swiper-button-next {
+    outline: none;
     color: #ffffff;
 
     &:after {
@@ -873,7 +874,7 @@ svg {
       &:nth-child(2) {
 
         &:before {
-          content: 'БАНК';
+          content: 'Банк';
         }
 
         &:after {
@@ -884,7 +885,7 @@ svg {
       &:nth-child(3) {
 
         &:before {
-          content: 'СКЛАД';
+          content: 'Склад';
         }
 
         &:after {
@@ -895,7 +896,7 @@ svg {
       &:nth-child(4) {
 
         &:before {
-          content: 'КАДРЫ';
+          content: 'Кадры';
         }
 
         &:after {
@@ -907,7 +908,7 @@ svg {
       &:nth-child(5) {
 
         &:before {
-          content: 'УЧЁТ';
+          content: 'Учёт';
         }
 
         &:after {
@@ -918,7 +919,7 @@ svg {
       &:nth-child(6) {
 
         &:before {
-          content: 'СТАТИСТИКА';
+          content: 'Статистика';
         }
 
         &:after {
@@ -929,7 +930,7 @@ svg {
       &:nth-child(7) {
 
         &:before {
-          content: 'НАЛОГИ';
+          content: 'Налоги';
         }
 
         &:after {
@@ -946,7 +947,7 @@ svg {
       &:nth-child(8) {
 
         &:before {
-          content: '1С ИНТЕГРАЦИЯ';
+          content: '1С Интеграция';
           font-size: 16px;
         }
 
