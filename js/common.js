@@ -1,8 +1,7 @@
-$(function($){
+$(function ($) {
     'use strict';
     $(window).on('load', function () {
-        if ($(".pre-loader").length > 0)
-        {
+        if ($(".pre-loader").length > 0) {
             $(".pre-loader").fadeOut("slow");
         }
     });
@@ -17,120 +16,7 @@ $(window).click(function () {
     $('.language').removeClass('opened')
 })
 
-const offers = [
-    {id: 0, name: "EDO  ", desc: "EDO Desciption", price: 1},
-    {id: 1, name: "Banking  ", desc: "Banking Desciption", price: 2},
-    {id: 2, name: "Reporting  ", desc: "Reporting Desciption", price: 3},
-    {id: 3, name: "Statistics  ", desc: "Statistics Desciption", price: 4},
-    {id: 4, name: "Storage  ", desc: "Storage Desciption", price: 5},
-    {id: 5, name: "HR  ", desc: "HR Desciption", price: 6},
-    {id: 6, name: "MSFO  ", desc: "EDO Desciption", price: 7},
-    {
-        id: 7,
-        name: "1C Integration  ",
-        desc: "1C Integration Desciption",
-        price: 8,
-    },
-];
-
 $(document).ready(() => {
-    let tariffBlock = $("#targetElement");
-    let packageBlock = $("#text");
-    let priceBlock = $("#price");
-
-    function sum(input) {
-        let total = 0;
-        for (let i = 0; i < input.length; i++) {
-            if (isNaN(input[i])) {
-                continue;
-            }
-            total += Number(input[i]);
-        }
-        return total;
-    }
-
-    const priceAmount = [];
-    const orderedArr = [];
-
-    function sum(input) {
-        let total = 0;
-        for (let i = 0; i < input.length; i++) {
-            if (isNaN(input[i])) {
-                continue;
-            }
-            total += Number(input[i]);
-        }
-        return total;
-    }
-
-    for (let x = 0; x < offers.length; x++) {
-        tariffBlock.append(`
-    <li id="text-elem" class="offers-card-item-add" data-item-index="${offers[x].id}">
-      <label for="item-input-${offers[x].id}" class="switch">
-        <input id="item-input-${offers[x].id}" type="checkbox">
-        <span class="slider round"></span>
-      </label>
-      <p>${offers[x].name}</p>
-    </li>`);
-    }
-
-    $(".offers-card-item-add input").on("click", function (e) {
-        // $("ul#text").removeClass("active-list");
-
-        const elem = $(e.target).parent().parent().data("item-index");
-        const result = offers.find((item) => {
-            return item.id === elem;
-        });
-
-        if (
-            orderedArr.includes(offers[result.id]) &&
-            $(`li#offer-${elem}`).length == 1
-        ) {
-            console.log("delete");
-            // Deleting from DOM
-            $(`li#offer-${elem}`).remove();
-
-            // Deleting from Array for ORDER NAMES
-            if (orderedArr.indexOf(offers[elem]) > -1) {
-                orderedArr.splice(orderedArr.indexOf(offers[elem]), 1);
-            }
-            // Deleting from Array for PRICE
-            if (priceAmount.indexOf(offers[elem].price) > -1) {
-                priceAmount.splice(priceAmount.indexOf(offers[elem].price), 1);
-            }
-            document.getElementById("price-tag").innerHTML =
-                "Price:  " + sum(priceAmount);
-
-            // console.log(orderedArr);
-            // console.log(priceAmount);
-            // console.log(sum(priceAmount));
-        } else if (result.id === elem) {
-            console.log("added");
-            orderedArr.push(offers[elem]);
-            priceAmount.push(offers[elem].price);
-
-            packageBlock.append(
-                `<li class="offers-card-item" id="offer-${elem}"> ${offers[elem].name}</li>`
-            );
-
-            // console.log(priceAmount);
-            // console.log(orderedArr);
-            // console.log(sum(priceAmount));
-
-            document.getElementById("price-tag").innerHTML =
-                "Price:  " + sum(priceAmount) + "$";
-        } else {
-            return null;
-        }
-
-        if (orderedArr.length > 0) {
-            $('ul#text').removeClass('active-list');
-        } else {
-            console.log('tete')
-            $("ul#text").addClass('active-list');
-        }
-
-    });
     $('#myVideo').on('ended', function () {
         this.load();
         this.play();
@@ -150,11 +36,16 @@ var swiper = new Swiper(".swiper-container", {
         clickable: true,
     },
 });
-
-function valueChanged(e) {
-    let a = e.value;
-    e.style.background = `linear-gradient(to right, #FDB914,#FDB914 ${a}%, #eee ${a}%)`;
-}
+var swiper = new Swiper(".VideoSwiper", {
+    effect: "flip",
+    pagination: {
+        el: ".swiper-pagination",
+    },
+    navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+    },
+});
 
 function toggle() {
     let sec = document.getElementById('nav');
@@ -162,6 +53,13 @@ function toggle() {
 
     let slide = document.getElementById('burger')
     slide.classList.toggle('slideFrom')
+
+    let b1 = document.getElementById('btn-reg')
+    let b2 = document.getElementById('btn-log')
+    b1.classList.toggle('btn-black')
+    b1.classList.toggle('btn-white')
+    b2.classList.toggle('btn-black')
+    b2.classList.toggle('btn-white')
 }
 
 let btn = document.querySelector('.btnSlide');
@@ -172,17 +70,29 @@ btn.onmousemove = function (e) {
     btn.style.setProperty('--y', y + 'px');
 }
 
-
 var app = new Vue({
     el: '#app',
     data: {
         selected: {
+            id:'1',
             image: '../img/EDO-ill.svg',
-            desc: 'ЭДО - позволит вам легко и быстро обмениваться электронными документами'
+            desc: '',
+            link: ''
         },
         images: [
             {
                 src: ('../img/EDO-ill.svg'),
+                id:'1',
+                name: {
+                    ru:'ЭДО',
+                    en:'EDO',
+                    uz:'EDO',
+                },
+                link: {
+                    ru: './pages/service.html#edo',
+                    en: 'serviceEn.html#edo',
+                    uz: 'serviceUz.html#edo',
+                },
                 text: {
                     ru: 'ЭДО - позволит вам легко и быстро обмениваться электронными документами',
                     en: 'hey',
@@ -191,6 +101,18 @@ var app = new Vue({
             },
             {
                 src: ('../img/bank-ill.svg'),
+                id:'2',
+
+                name: {
+                    ru:'Банк',
+                    en:'Bank',
+                    uz:'Bank',
+                },
+                link: {
+                    ru: './pages/service.html#bank',
+                    en: 'serviceEn.html#bank',
+                    uz: 'serviceUz.html#bank',
+                },
                 text: {
                     ru: 'Банк - позволит вам легко и быстро обмениваться электронными документами',
                     en: 'hey',
@@ -198,7 +120,18 @@ var app = new Vue({
                 }
             },
             {
+                id:'3',
                 src: ('../img/storage-ill.svg'),
+                name: {
+                    ru:'Cклад',
+                    en:'Storage',
+                    uz:'Storage',
+                },
+                link: {
+                    ru: './pages/service.html#storage',
+                    en: 'serviceEn.html#storage',
+                    uz: 'serviceUz.html#storage',
+                },
                 text: {
                     ru: 'Банк - позволит вам легко и быстро обмениваться электронными документами',
                     en: 'hey',
@@ -206,7 +139,18 @@ var app = new Vue({
                 }
             },
             {
+                id:'4',
                 src: ('../img/hr-ill.svg'),
+                name: {
+                    ru:'Кадры',
+                    en:'HR',
+                    uz:'HR',
+                },
+                link: {
+                    ru: './pages/service.html#hr',
+                    en: 'serviceEn.html#hr',
+                    uz: 'serviceUz.html#hr',
+                },
                 text: {
                     ru: 'Банк - позволит вам легко и быстро обмениваться электронными документами',
                     en: 'hey',
@@ -214,7 +158,18 @@ var app = new Vue({
                 }
             },
             {
+                id:'5',
                 src: ('../img/accounting-ill.svg'),
+                name: {
+                    ru:'Бухгалтерия',
+                    en:'Accounting',
+                    uz:'Buxgalteriya',
+                },
+                link: {
+                    ru: './pages/service.html#accounting',
+                    en: 'serviceEn.html#accounting',
+                    uz: 'serviceUz.html#accounting',
+                },
                 text: {
                     ru: 'Банк - позволит вам легко и быстро обмениваться электронными документами',
                     en: 'hey',
@@ -222,7 +177,18 @@ var app = new Vue({
                 }
             },
             {
+                id:'6',
                 src: ('../img/statistics-ill.svg'),
+                name: {
+                    ru:'Статистика',
+                    en:'Statistics',
+                    uz:'Statistika',
+                },
+                link: {
+                    ru: './pages/service.html#statistics',
+                    en: 'serviceEn.html#statistics',
+                    uz: 'serviceUz.html#statistics',
+                },
                 text: {
                     ru: 'Банк - позволит вам легко и быстро обмениваться электронными документами',
                     en: 'hey',
@@ -230,7 +196,18 @@ var app = new Vue({
                 }
             },
             {
-                src: ('../img/soliq-ico.png'),
+                id:'7',
+                src: ('../img/soliq-ill.svg'),
+                name: {
+                    ru:'Налоги',
+                    en:'Taxes',
+                    uz:'Soliq',
+                },
+                link: {
+                    ru: './pages/service.html#soliq',
+                    en: 'serviceEn.html#soliq',
+                    uz: 'serviceUz.html#soliq',
+                },
                 text: {
                     ru: 'Банк - позволит вам легко и быстро обмениваться электронными документами',
                     en: 'hey',
@@ -238,7 +215,18 @@ var app = new Vue({
                 }
             },
             {
-                src: ('../img/hr-ico.png'),
+                id:'8',
+                src: ('../img/1c-ill.svg'),
+                name: {
+                    ru:'1C Интеграция',
+                    en:'1C Integration',
+                    uz:'1С Integratsiya',
+                },
+                link: {
+                    ru: './pages/service.html#1c',
+                    en: 'serviceEn.html#1c',
+                    uz: 'serviceUz.html#1c',
+                },
                 text: {
                     ru: 'Банк - позволит вам легко и быстро обмениваться электронными документами',
                     en: 'hey',
@@ -246,7 +234,18 @@ var app = new Vue({
                 }
             },
             {
-                src: ('../img/msfo-ico.png'),
+                id:'9',
+                src: ('../img/msfo-ill.svg'),
+                name: {
+                    ru:'МСФО',
+                    en:'MSFO',
+                    uz:'MSFO',
+                },
+                link: {
+                    ru: './pages/service.html#msfo',
+                    en: 'serviceEn.html#msfo',
+                    uz: 'serviceUz.html#msfo',
+                },
                 text: {
                     ru: 'Банк - позволит вам легко и быстро обмениваться электронными документами',
                     en: 'hey',
@@ -256,9 +255,16 @@ var app = new Vue({
         ],
     },
     methods: {
-      updateImg: function (src, text) {
-        this.selected.image = src
-        this.selected.desc = text
-      }
+        updateImg: function (src, text, link, id) {
+            let active = document.getElementById(id);
+            active.classList.toggle("active-item");
+            this.selected.id = id
+            this.selected.image = src
+            this.selected.desc = text
+            this.selected.link = link
+        }
     }
 })
+
+
+
