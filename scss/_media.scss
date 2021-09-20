@@ -174,7 +174,13 @@
         left: 0;
       }
     }
+    .language_mobile{
+      display: block;
+      margin: 5px 0 10px 25px;
+    }
+
     .language {
+      display: none;
       font-family: $Roboto-reg;
       margin-left: -100px;
       width: 100%;

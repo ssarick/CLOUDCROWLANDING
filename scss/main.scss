@@ -297,11 +297,15 @@ strong {
   transition: 1s;
 }
 
+.language_mobile{
+  display: none;
+}
+
 .language {
   position: absolute;
   top: 0;
   padding: 2px;
-  right: -120px;
+  right: -150px;
   box-sizing: border-box;
   margin-right: 18px;
   color: $text-wh;
